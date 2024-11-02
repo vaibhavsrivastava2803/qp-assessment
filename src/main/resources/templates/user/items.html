@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User - Available Grocery Items</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 10px; border: 1px solid #ddd; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+	
+	<div class="logout-button">
+    <form th:action="@{/logout}" method="post">
+		
+        <button type="submit">Logout</button>
+    </form>
+</div>
+
+<h1>Available Grocery Items</h1>
+
+<!-- Form for booking items -->
+<form action="/user/book" method="post">
+	<label for="userName">Your Name:</label>
+    <input type="text" id="userName" name="userName" required>
+	
+    <table>
+        <thead>
+            <tr>
+                <th>Select</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Inventory</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="item : ${items}">
+                <td><input type="checkbox" name="itemIds" th:value="${item.id}"/></td>
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.price}"></td>
+                <td th:text="${item.inventory}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="submit">Book Selected Items</button>
+</form>
+
+</body>
+</html>
